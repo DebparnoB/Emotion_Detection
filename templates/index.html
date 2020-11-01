@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emotion prediction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('form').on('submit', function(event) {
+       $.ajax({
+          data : {
+             firstName : $('#firstName').val(),
+                 },
+             type : 'POST',
+             url : '/process'
+            })
+        .done(function(data) {
+          $('#output').text(data.output).show();
+      });
+      event.preventDefault();
+      });
+ });
+  </script>
+
+
+</head>
+
+<body>
+  <p style = " position: absolute; width: 423px; height: 81px; left: 263px; top: 83px; font-family: Roboto; font-style: normal; font-weight: normal; font-size: 48px; line-height: 56px; color: #000000;">Emotion Prediction </p>
+<form class="form-inline">
+<!--First Name-->
+<div class="form-group">
+<label class="sr-only" for="firstName">First Name</label>
+<input type="text" class="form-control" id="firstName" placeholder="Enter Text..." autocomplete= "off" style = " position: absolute; width: 700px; height: 122px; left: 125px; top: 149px; ">
+
+
+</div>
+<!--Last Name
+<div class="form-group">
+<label class="sr-only" for="lastName">Last Name</label>
+<input type="text" class="form-control" id="lastName" placeholder="Last Name">
+</div>
+-->
+
+<!--Submit Button-->
+<button type="submit" class="btn btn-default" style= " position: absolute; width: 108px; height: 39px; left: 421px; top: 285px; background: #57F2E8; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25); text-align : center;" >Predict</button>
+</form>
+</br>
+<div id="output" style = " position: absolute; width: 695px; height: 157px; left: 130px; top: 369px; background: #FFFFFF;"></div>
+</br>
+
+
+</body>
+</html>
